@@ -8,5 +8,5 @@ target_include_directories(calculator PUBLIC src)
 
 add_executable(runner src/main.cpp)
 target_link_libraries(runner PUBLIC calculator)
-add_subdirectory(tests CMakeLists.txt)
+add_subdirectory(tests)
 
