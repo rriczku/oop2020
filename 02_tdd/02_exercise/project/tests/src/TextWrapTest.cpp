@@ -6,4 +6,7 @@ TEST(TextWrap, Constructor) {
     TextWrap textWrap{};
 }
 
-// TODO: ...
+TEST(TextWrap, Constructor_PassNumberOfColumnsThroughTheConstructor)
+{
+    TextWrap textWrap{2};
+}
