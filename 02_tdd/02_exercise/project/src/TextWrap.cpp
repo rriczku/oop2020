@@ -1,6 +1,6 @@
 #include "TextWrap.h"
 
-TextWrap::TextWrap(int) {
+TextWrap::TextWrap(int columns) : columns(columns) {
 
 }
 std::string TextWrap::wrap(const std::string& line) const
