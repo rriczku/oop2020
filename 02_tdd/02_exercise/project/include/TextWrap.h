@@ -5,5 +5,6 @@
 class TextWrap {
 public:
 
-    // TODO: ...
+TextWrap(){}
+TextWrap(int){}
 };
