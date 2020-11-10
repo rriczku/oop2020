@@ -35,3 +35,13 @@ TEST(TextWrap,Wrap_FourCharacterInFourColumn)
     TextWrap textWrap{1};
     EXPECT_EQ("a\nb\nc\nd",textWrap.wrap("abcd"));
 }
+TEST(TextWrap,Wrap_FourCharacterInThreeColumn)
+{
+    TextWrap textWrap{3};
+    EXPECT_EQ("abc\nd",textWrap.wrap("abcd"));
+}
+TEST(TextWrap,Wrap_ThreeWordsInThColumn)
+{
+    TextWrap textWrap{13};
+    EXPECT_EQ("siemankooo\nwitam hej",textWrap.wrap("siemankooo witam hej"));
+}
