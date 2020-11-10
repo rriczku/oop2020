@@ -7,5 +7,5 @@ public:
 
 
 explicit TextWrap(int columns =1);
-std::string wrap(std::string line);
+std::string wrap(const std::string &line) const;
 };

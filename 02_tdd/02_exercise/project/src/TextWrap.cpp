@@ -3,7 +3,7 @@
 TextWrap::TextWrap(int) {
 
 }
-std::string TextWrap::wrap(std::string line)
+std::string TextWrap::wrap(const std::string& line) const
 {
     return line;
 }
