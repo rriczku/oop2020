@@ -1,3 +1,5 @@
 #include "TextWrap.h"
 
-// TODO: ...
+TextWrap::TextWrap(int) {
+
+}

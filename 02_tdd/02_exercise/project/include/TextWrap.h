@@ -7,4 +7,5 @@ public:
 
 TextWrap(){}
 TextWrap(int){}
+explicit TextWrap(int columns =1);
 };
