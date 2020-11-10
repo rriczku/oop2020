@@ -15,3 +15,8 @@ TEST(TextWrap,Wrap_OneCharacterInOneColumn)
     TextWrap textWrap{1};
     EXPECT_EQ("a",textWrap.wrap("a"));
 }
+TEST(TextWrap,Wrap_OneCharacterInOneColumn_OtherCharacter)
+{
+    TextWrap textWrap{1};
+    EXPECT_EQ("b",textWrap.wrap("b"));
+}
