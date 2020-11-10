@@ -13,5 +13,5 @@ TEST(TextWrap, Constructor_PassNumberOfColumnsThroughTheConstructor)
 TEST(TextWrap,Wrap_OneCharacterInOneColumn)
 {
     TextWrap textWrap{1};
-    EXPECT_EQ("a",textWrap("a"));
+    EXPECT_EQ("a",textWrap.wrap("a"));
 }

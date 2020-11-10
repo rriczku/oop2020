@@ -5,7 +5,7 @@
 class TextWrap {
 public:
 
-TextWrap(){}
-TextWrap(int){}
+
 explicit TextWrap(int columns =1);
+std::string wrap(std::string _);
 };
