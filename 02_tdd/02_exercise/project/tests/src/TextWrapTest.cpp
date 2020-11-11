@@ -32,8 +32,8 @@ TEST(TextWrap,Wrap_FourCharacterInTwoColumn)
 }
 TEST(TextWrap,Wrap_FourCharacterInFourColumn)
 {
-    TextWrap textWrap{1};
-    EXPECT_EQ("a\nb\nc\nd",textWrap.wrap("abcd"));
+    TextWrap textWrap{4};
+    EXPECT_EQ("abcd",textWrap.wrap("abcd"));
 }
 TEST(TextWrap,Wrap_FourCharacterInThreeColumn)
 {
