@@ -38,16 +38,3 @@ std::string TextWrap::wrap(const std::string& line) const {
     }
     return line;
 }
-/*
- *
- *
- *            if (line.size() > 1) {
-                for (int i = 0; i < line.size(); i += columns)
-                {
-                    std::string hhLine = line.substr(i, columns);
-                    hLine += (hhLine + "\n");
-                }
-            hLine.pop_back();
-            return hLine;
- *
- */
