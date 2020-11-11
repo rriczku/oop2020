@@ -5,26 +5,35 @@ TextWrap::TextWrap(int columns) : columns(columns) {
 
 }
 std::string TextWrap::wrap(const std::string& line) const {
-    std::string hLine;
-    if(line.size()>1)
+    std::string hLine=line;
+    if(line.size()>columns)
     {
-        for(int i=0;i<line.size();i+=columns)
+        int readChars=0;
+        while(readChars<line.size())
         {
-            std::string hhLine=line.substr(i,columns);
-
-            if(hhLine.size()==columns)
+            std::string hhLine=line.substr(readChars,columns);
+            readChars+=hhLine.size();
+            if( hhLine.size()==columns )
             {
-                if(line[i+columns]!=' '&&line[i+columns]!='\0')
+                if(line[readChars]==' ')
                 {
-                    int spacePos=hhLine.find_last_of(' ');
-                    if(spacePos!=-1)
-                        hhLine.replace(spacePos,1,"\n");
-                    else hhLine = (hhLine.substr(i,columns)+"\n");
+                    hLine[readChars]='\n';
+                    readChars++;
+                }
+                else if(line[readChars]!='\0')
+                {
+                    int lastSpacePos=hhLine.find_last_of(' ');
+                    if(lastSpacePos!=-1)
+                    {
+                        hLine[readChars-hhLine.size()+lastSpacePos]='\n';
+                        readChars-=(hhLine.size()-lastSpacePos-1);
+                    }else{
+                       hLine.insert(readChars,1,'\n');
+
+                    }
                 }
             }
-            hLine+=hhLine;
         }
-        //hLine.pop_back();
         return hLine;
     }
     return line;
