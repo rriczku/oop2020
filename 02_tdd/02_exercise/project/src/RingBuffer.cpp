@@ -8,22 +8,25 @@ RingBuffer::RingBuffer(int capacity) : capacity(capacity){
     indexOfLastInsertedItem=-1;
 }
 void RingBuffer::add(int value){
-   if(currentSize>=capacity)
+   int temp;
+    if(currentSize>=capacity)
    {
-       int temp=findPosToInsert(2);
+       temp=findPosToInsert(2);
        array[temp]=value;
-       hArray[temp]++;
+       hArray[temp]=0;
+       //hArray[temp]++;
        indexOfLastInsertedItem=temp;
    }
-   else
+    else
    {
-       int temp = findPosToInsert(1);
+       temp = findPosToInsert(1);
        array[temp]=value;
-       hArray[temp]++;
+       //hArray[temp]++;
        currentSize++;
        indexOfLastInsertedItem=temp;
    }
    getOlder();
+   hArray[temp]++;
 }
 int RingBuffer::remove(){
     int temp=findPosToInsert(2);
@@ -45,12 +48,14 @@ int RingBuffer::findPosToInsert(int opt) {
         }
         return min;
     }
-    int max = 0;
-    for (int i = 1; i < capacity; i++) {
-        if (hArray[i] > hArray[max])
-            max = i;
+    else if(opt==2) {
+        int max = 0;
+        for (int i = 1; i < capacity; i++) {
+            if (hArray[i] > hArray[max])
+                max = i;
+        }
+        return max;
     }
-    return max;
 }
 void RingBuffer::getOlder()
 {

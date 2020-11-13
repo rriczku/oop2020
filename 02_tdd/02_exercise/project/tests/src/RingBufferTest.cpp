@@ -121,10 +121,6 @@ TEST(RingBuffer, RemoveAndAddElementToBuffer5)
     ringBuffer.add(6);
     ringBuffer.add(7);
     ringBuffer.remove();
-    for(int i=0;i<5;i++)
-    {
-        std::cout<<ringBuffer.array[i]<<std::endl;
-    }
 
     EXPECT_TRUE(0 == std::memcmp(tab,ringBuffer.array,5*sizeof(int)));
 }
