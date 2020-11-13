@@ -6,6 +6,7 @@ public:
 
     int* array;
     void add(int value);
+    int remove();
 private:
     int capacity;
     int currentSize;
