@@ -28,5 +28,14 @@ TEST(TextWrap, AddTwoElementToBuffer)
     ringBuffer.add(4);
     EXPECT_TRUE(0 == std::memcmp(tab,ringBuffer.array,sizeof(tab)));
 }
-
+TEST(TextWrap, DeleteElementElementFromBuffer)
+{
+    RingBuffer ringBuffer{5};
+    int* tab = new int[5];
+    tab[0]=3;
+    tab[1]=4;
+    ringBuffer.add(3);
+    ringBuffer.add(4);
+    EXPECT_EQ(3,ringBuffer.remove());
+}
 // TODO: ...
