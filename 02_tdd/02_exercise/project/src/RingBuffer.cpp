@@ -7,7 +7,9 @@ RingBuffer::RingBuffer(int capacity) : capacity(capacity){
 }
 void RingBuffer::add(int value){
     array[currentSize]=value;
-    currentSize++;
+
+    if(currentSize==4) currentSize=0;
+    else currentSize++;
 }
 int RingBuffer::remove(){
     int temp=array[0];
