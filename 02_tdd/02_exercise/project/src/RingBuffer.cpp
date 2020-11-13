@@ -14,5 +14,6 @@ void RingBuffer::add(int value){
 int RingBuffer::remove(){
     int temp=array[0];
     array[0] = 0;
+    currentSize--;
     return temp;
 }
