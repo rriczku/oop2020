@@ -56,5 +56,6 @@ TEST(RingBuffer, RemoveAndAddElementToBuffer)
     ringBuffer.add(3);
     ringBuffer.remove();
     ringBuffer.add(4);
+
     EXPECT_TRUE(0 == std::memcmp(tab,ringBuffer.array,5*sizeof(int)));
 }
