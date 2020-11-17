@@ -8,7 +8,7 @@
 
 TEST(VectorInt, SizeVsCapacity) {
 
-    // TODO: ...
+    std::vector<int> vector{1,2,3};
 
     ASSERT_EQ(3u, vector.size());
     ASSERT_EQ(3u, vector.capacity());
@@ -16,7 +16,7 @@ TEST(VectorInt, SizeVsCapacity) {
     EXPECT_EQ(2, vector[1]);
     EXPECT_EQ(3, vector[2]);
 
-    // TODO: ...
+    vector.reserve(10);
 
     ASSERT_EQ(3u, vector.size());
     ASSERT_EQ(10u, vector.capacity());
@@ -24,7 +24,7 @@ TEST(VectorInt, SizeVsCapacity) {
     EXPECT_EQ(2, vector[1]);
     EXPECT_EQ(3, vector[2]);
 
-    // TODO: ...
+    vector.shrink_to_fit();
 
     ASSERT_EQ(3u, vector.size());
     ASSERT_EQ(3u, vector.capacity());
@@ -32,7 +32,8 @@ TEST(VectorInt, SizeVsCapacity) {
     EXPECT_EQ(2, vector[1]);
     EXPECT_EQ(3, vector[2]);
 
-    // TODO: ...
+    vector.reserve(6);
+    vector.push_back(4);
 
     ASSERT_EQ(4u, vector.size());
     ASSERT_EQ(6u, vector.capacity());
@@ -41,7 +42,8 @@ TEST(VectorInt, SizeVsCapacity) {
     EXPECT_EQ(3, vector[2]);
     EXPECT_EQ(4, vector[3]);
 
-    // TODO: ...
+    vector.reserve(100);
+    vector.resize(100);
 
     ASSERT_EQ(100u, vector.size());
     ASSERT_EQ(100u, vector.capacity());
@@ -50,58 +52,63 @@ TEST(VectorInt, SizeVsCapacity) {
     EXPECT_EQ(2, vector[1]);
     EXPECT_EQ(3, vector[2]);
     EXPECT_EQ(4, vector[3]);
+
 }
 
 TEST(VectorBool, EraseElement) {
 
-    // TODO: ...
+    std::vector<bool> vector{true,false,true};
 
     ASSERT_EQ(3u, vector.size());
     EXPECT_TRUE(vector[0]);
     EXPECT_FALSE(vector[1]);
     EXPECT_TRUE(vector[2]);
 
-    // TODO: ...
+    vector.erase(vector.begin()+1);
 
     ASSERT_EQ(2u, vector.size());
     EXPECT_TRUE(vector[0]);
     EXPECT_TRUE(vector[1]);
-}
+
+  }
 
 TEST(DequeFloat, InsertBeginAndEnd) {
 
-    // TODO: ...
+    std::deque<float> deque;
 
     ASSERT_EQ(0u, deque.size());
 
-    // TODO: ...
+    deque.push_back(2.0f);
 
     ASSERT_EQ(1u, deque.size());
     EXPECT_FLOAT_EQ(2.0f, deque[0]);
 
-    // TODO: ...
+    deque.push_front(1.0f);
+    deque.push_back(3.0f);
 
     ASSERT_EQ(3u, deque.size());
     EXPECT_FLOAT_EQ(1.0f, deque[0]);
     EXPECT_FLOAT_EQ(2.0f, deque[1]);
     EXPECT_FLOAT_EQ(3.0f, deque[2]);
+
 }
 
 TEST(VectorFloat, RemoveElementsFromTheEnd) {
 
-    // TODO: ...
+    std::vector<float> vector{1,2,3};
 
     ASSERT_EQ(3u, vector.size());
     EXPECT_FLOAT_EQ(1, vector[0]);
     EXPECT_FLOAT_EQ(2, vector[1]);
     EXPECT_FLOAT_EQ(3, vector[2]);
 
-    // TODO: ...
+    vector.pop_back();
+    vector.pop_back();
 
     ASSERT_EQ(1u, vector.size());
     EXPECT_FLOAT_EQ(1, vector[0]);
 
-    // TODO: ...
+    vector.pop_back();
 
     ASSERT_EQ(0u, vector.size());
     ASSERT_TRUE(vector.empty());
@@ -109,7 +116,7 @@ TEST(VectorFloat, RemoveElementsFromTheEnd) {
 
 TEST(VectorChar, Copy) {
 
-    // TODO: ...
+    std::vector<char> vectorIn{'a','b','c','d','\0'};
 
     ASSERT_EQ(5u, vectorIn.size());
     ASSERT_EQ('a', vectorIn[0]);
@@ -119,7 +126,7 @@ TEST(VectorChar, Copy) {
     ASSERT_EQ('\0', vectorIn[4]);
     EXPECT_STREQ("abcd", vectorIn.data());
 
-    // TODO: ...
+    std::vector<char> vectorOut=vectorIn;
 
     ASSERT_EQ(5u, vectorIn.size());
     EXPECT_STREQ("abcd", vectorIn.data());
@@ -129,7 +136,7 @@ TEST(VectorChar, Copy) {
 
 TEST(VectorFloat, SizeShouldBeLessThanOrEqualToCapacity) {
 
-    // TODO: ...
+    std::vector<float> vector{1,2,3};
 
     ASSERT_EQ(3u, vector.size());
     EXPECT_FLOAT_EQ(1, vector[0]);
@@ -137,13 +144,13 @@ TEST(VectorFloat, SizeShouldBeLessThanOrEqualToCapacity) {
     EXPECT_FLOAT_EQ(3, vector[2]);
     EXPECT_EQ(vector.capacity(), vector.size());
 
-    // TODO: ...
+    vector.push_back(4);
 
     ASSERT_EQ(4u, vector.size());
     EXPECT_FLOAT_EQ(4, vector[3]);
     EXPECT_GE(vector.capacity(), vector.size());
 
-    // TODO: ...
+    vector.shrink_to_fit();
 
     ASSERT_EQ(4u, vector.size());
     EXPECT_EQ(vector.capacity(), vector.size());
@@ -151,7 +158,7 @@ TEST(VectorFloat, SizeShouldBeLessThanOrEqualToCapacity) {
 
 TEST(VectorFloat, ReserveAdditionalCapacity) {
 
-    // TODO: ...
+    std::vector<float> vector{1,2,3};
 
     EXPECT_EQ(3, vector.size());
     EXPECT_EQ(3, vector.capacity());
@@ -159,7 +166,7 @@ TEST(VectorFloat, ReserveAdditionalCapacity) {
     EXPECT_FLOAT_EQ(2, vector[1]);
     EXPECT_FLOAT_EQ(3, vector[2]);
 
-    // TODO: ...
+    vector.reserve(10);
 
     EXPECT_EQ(3, vector.size());
     EXPECT_EQ(10, vector.capacity());
@@ -170,14 +177,14 @@ TEST(VectorFloat, ReserveAdditionalCapacity) {
 
 TEST(VectorFloat, RemoveFirstValue) {
 
-    // TODO: ...
+    std::vector<float> vector{1,2,3};
 
     ASSERT_EQ(3u, vector.size());
     EXPECT_EQ(1, vector[0]);
     EXPECT_EQ(2, vector[1]);
     EXPECT_EQ(3, vector[2]);
 
-    // TODO: ...
+    vector.erase(vector.begin());
 
     ASSERT_EQ(2u, vector.size());
     EXPECT_EQ(2, vector[0]);
@@ -186,14 +193,14 @@ TEST(VectorFloat, RemoveFirstValue) {
 
 TEST(VectorDouble, RemoveLastValue) {
 
-    // TODO: ...
+    std::vector<double> vector{1,2,3};
 
     ASSERT_EQ(3u, vector.size());
     EXPECT_DOUBLE_EQ(1, vector[0]);
     EXPECT_DOUBLE_EQ(2, vector[1]);
     EXPECT_DOUBLE_EQ(3, vector[2]);
 
-    // TODO: ...
+    vector.pop_back();
 
     ASSERT_EQ(2u, vector.size());
     EXPECT_DOUBLE_EQ(1, vector[0]);
@@ -202,7 +209,7 @@ TEST(VectorDouble, RemoveLastValue) {
 
 TEST(VectorVectorInt, TwoDimensionalVector) {
 
-    // TODO: ...
+    std::vector<std::vector <int>> vector{{1,2,3},{4,5,6}};
 
     EXPECT_FLOAT_EQ(1, vector[0][0]);
     EXPECT_FLOAT_EQ(2, vector[0][1]);
@@ -214,12 +221,15 @@ TEST(VectorVectorInt, TwoDimensionalVector) {
 
 TEST(VectorFloat, SortLargeVector) {
 
-    // TODO: ...
+    std::vector<float> vector;
+    vector.push_back(50);
+    for(int i=0;i<999;i++)
+        vector.push_back(i);
 
     EXPECT_EQ(1000, vector.size());
     ASSERT_FALSE(std::is_sorted(vector.begin(), vector.end()));
 
-    // TODO: ...
+    std::sort(vector.begin(),vector.end());
 
     EXPECT_EQ(1000, vector.size());
     EXPECT_TRUE(std::is_sorted(vector.begin(), vector.end()));
@@ -227,7 +237,7 @@ TEST(VectorFloat, SortLargeVector) {
 
 TEST(ArrayInt, HasConstantSizeDefinedAtCompileTime) {
 
-    // TODO: ...
+    std::array<int,2> array={1,2};
 
     static_assert(array.size() == 2, "Compilation error: wrong array size");
 
@@ -237,7 +247,10 @@ TEST(ArrayInt, HasConstantSizeDefinedAtCompileTime) {
 
 TEST(ArrayArrayArrayInt, ThreeDimensionalStaticArray) {
 
-    // TODO: ...
+std::array<std::array<std::array<int, 2>, 2>, 2> array{{
+                                                               {{{ 1, 2 }, { 3, 4 }}},
+                                                               {{{ 5, 6 }, { 7, 8 }}},
+                                                       }};
 
     ASSERT_EQ(2u, array.size());
     ASSERT_EQ(2u, array[0].size());
@@ -259,7 +272,7 @@ TEST(ArrayArrayArrayInt, ThreeDimensionalStaticArray) {
 
 TEST(ListInt, RemoveIfGreaterOrEqualToSeven) {
 
-    // TODO: ...
+    std::list<int> list={5,6,7,8,9};
 
     ASSERT_EQ(5, list.size());
     auto listIterator = list.begin();
@@ -269,7 +282,11 @@ TEST(ListInt, RemoveIfGreaterOrEqualToSeven) {
     EXPECT_EQ(8, *(listIterator++));
     EXPECT_EQ(9, *(listIterator++));
 
-    // TODO: ...
+    struct isGreaterOrEqualToSeven{
+        bool operator()(const int& value) { return (value>=7); }
+    };
+
+    list.remove_if(isGreaterOrEqualToSeven());
 
     ASSERT_EQ(2, list.size());
     EXPECT_EQ(5, list.front());
@@ -278,7 +295,7 @@ TEST(ListInt, RemoveIfGreaterOrEqualToSeven) {
 
 TEST(ListInt, UniqueNextToEachOther) {
 
-    // TODO: ...
+    std::list<int> list{1,2,1,1,2,2};
 
     EXPECT_EQ(6, list.size());
     auto listIterator = list.begin();
@@ -290,7 +307,7 @@ TEST(ListInt, UniqueNextToEachOther) {
     EXPECT_EQ(2, *(listIterator++));
     EXPECT_EQ(list.end(), listIterator);
 
-    // TODO: ...
+    list.unique();
 
     EXPECT_EQ(4, list.size());
     listIterator = list.begin();
@@ -299,18 +316,18 @@ TEST(ListInt, UniqueNextToEachOther) {
     EXPECT_EQ(1, *(listIterator++));
     EXPECT_EQ(2, *(listIterator++));
     EXPECT_EQ(list.end(), listIterator);
-}
+ }
 
 TEST(DequeInt, PopFrontValue) {
 
-    // TODO: ...
+    std::deque<int> deque{1,2,3};
 
     ASSERT_EQ(3u, deque.size());
     EXPECT_FLOAT_EQ(1, deque[0]);
     EXPECT_FLOAT_EQ(2, deque[1]);
     EXPECT_FLOAT_EQ(3, deque[2]);
 
-    // TODO: ...
+    deque.pop_front();
 
     ASSERT_EQ(2u, deque.size());
     EXPECT_FLOAT_EQ(2, deque[0]);
@@ -319,35 +336,38 @@ TEST(DequeInt, PopFrontValue) {
 
 TEST(QueueDouble, PushAndPop) {
 
-    // TODO: ...
+    std::queue<double> queue;
 
     EXPECT_TRUE(queue.empty());
 
-    // TODO: ...
+    queue.push(1.0);
+    queue.push(2.0);
+    queue.push(3.0);
+    queue.push(4.0);
 
     ASSERT_EQ(4u, queue.size());
     EXPECT_DOUBLE_EQ(1.0, queue.front());
     EXPECT_DOUBLE_EQ(4.0, queue.back());
 
-    // TODO: ...
+    queue.pop();
 
     ASSERT_EQ(3u, queue.size());
     EXPECT_DOUBLE_EQ(2.0, queue.front());
     EXPECT_DOUBLE_EQ(4.0, queue.back());
 
-    // TODO: ...
+    queue.pop();
 
     ASSERT_EQ(2u, queue.size());
     EXPECT_DOUBLE_EQ(3.0, queue.front());
     EXPECT_DOUBLE_EQ(4.0, queue.back());
 
-    // TODO: ...
+    queue.pop();
 
     ASSERT_EQ(1u, queue.size());
     EXPECT_DOUBLE_EQ(4.0, queue.front());
     EXPECT_DOUBLE_EQ(4.0, queue.back());
 
-    // TODO: ...
+    queue.pop();
 
     ASSERT_EQ(0u, queue.size());
 }
