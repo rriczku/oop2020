@@ -44,10 +44,10 @@ namespace std {
     template<>
     struct hash<Medium> {
         std::size_t operator()(const Medium &d) const {
-           long r=0;
-           for(int i : d.data)
+           long long r=0;
+           for(int i=0;i<Medium::SIZE;i++)
            {
-               r+=(d.data[Medium::SIZE]+i%17);
+               r+=(d.data[i]+d.data[i%6])%Medium::SIZE;
            }
            return r;
         }

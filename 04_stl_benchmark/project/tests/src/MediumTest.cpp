@@ -104,5 +104,65 @@ TEST(MediumTest, Clear) {
         ASSERT_EQ(0, i);
     }
 }
+TEST(MediumTest, LessOperator)
+{
+    Medium mediumOne{};
+    Medium mediumTwo{};
+    for(int i=0;i<Medium::SIZE;i++)
+    {
+        if(i>=100)
+        {
+            mediumTwo.data[i]=i+1;
+            mediumOne.data[i]=i;
+        }
+        else
+        {
+            mediumOne.data[i]=i;
+            mediumTwo.data[i]=i;
+        }
+    }
+    EXPECT_TRUE(mediumOne<mediumTwo);
+}
+TEST(MediumTest, LessOperatorV2)
+{
+    Medium mediumOne{};
+    Medium mediumTwo{};
+    for(int i=0;i<Medium::SIZE;i++)
+    {
+        if(i>=100)
+        {
+            mediumTwo.data[i]=i-1;
+            mediumOne.data[i]=i;
+        }
+        else
+        {
+            mediumOne.data[i]=i;
+            mediumTwo.data[i]=i;
+        }
+    }
+    EXPECT_FALSE(mediumOne<mediumTwo);
+}
+TEST(MediumTest, Equal)
+{
+    Medium mediumOne{};
+    Medium mediumTwo{};
 
-// TODO: Add tests for your operators implementation!
+    std::fill_n(mediumOne.data,Medium::SIZE,1);
+    std::fill_n(mediumTwo.data,Medium::SIZE,1);
+
+    ASSERT_EQ(mediumOne,mediumTwo);
+
+    mediumOne.data[5]=5;
+    EXPECT_FALSE(mediumOne==mediumTwo);
+}
+TEST(MediumTest, Hash)
+{
+    Medium mediumOne{};
+    Medium mediumTwo{};
+
+    std::fill_n(mediumOne.data,Medium::SIZE,1);
+    std::fill_n(mediumTwo.data,Medium::SIZE,1);
+
+    std::hash<Medium> hash{};
+    ASSERT_EQ(hash(mediumOne),hash(mediumTwo));
+}
