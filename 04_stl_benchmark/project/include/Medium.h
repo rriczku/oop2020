@@ -26,6 +26,7 @@ struct Medium {
             if (data[i] != rhs.data[i])
                 return data[i] < rhs.data[i];
         }
+        return false;
     }
 
     bool operator==(const Medium &rhs) const {
@@ -43,10 +44,10 @@ namespace std {
     template<>
     struct hash<Medium> {
         std::size_t operator()(const Medium &d) const {
-           long r;
-           for(int i=0;i<Medium::SIZE;i++)
+           long r=0;
+           for(int i : d.data)
            {
-               r+=(d.data[Medium::SIZE]+d.data[i]%17);
+               r+=(d.data[Medium::SIZE]+i%17);
            }
            return r;
         }
