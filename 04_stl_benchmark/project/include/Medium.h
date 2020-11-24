@@ -22,13 +22,19 @@ struct Medium {
 
     bool operator<(const Medium &rhs) const {
 
-        // TODO: Implement me!
-        return false;
+        for(int i=0;i<SIZE;i++) {
+            if (data[i] != rhs.data[i])
+                return data[i] < rhs.data[i];
+        }
     }
 
     bool operator==(const Medium &rhs) const {
 
-        // TODO: Implement me!
+        for(int i=0;i<SIZE;i++)
+        {
+            if(data[i]!=rhs.data[i])
+                return false;
+        }
         return true;
     }
 };
@@ -37,9 +43,12 @@ namespace std {
     template<>
     struct hash<Medium> {
         std::size_t operator()(const Medium &d) const {
-
-            // TODO: Implement me!
-            return 0;
+           long r;
+           for(int i=0;i<Medium::SIZE;i++)
+           {
+               r+=(d.data[Medium::SIZE]+d.data[i]%17);
+           }
+           return r;
         }
     };
 }
