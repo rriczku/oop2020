@@ -108,5 +108,61 @@ TEST(LargeTest, Clear) {
     }
 }
 
+TEST(LargeTest, LessOperator)
+{
+    Large largeOne{};
+    Large largeTwo{};
+    largeTwo.clear();
+    largeOne.clear();
+    
+    std::fill_n(largeOne.data,15,13.43);
+    std::fill_n(largeTwo.data,15,13.43);
+    largeOne.data[10]=6.66;
+    
+    EXPECT_TRUE(largeOne<largeTwo);
+}
+TEST(LargeTest, LessOperatorV2)
+{
+    Large LargeOne{};
+    Large LargeTwo{};
+    LargeTwo.clear();
+    LargeOne.clear();
+
+    std::fill_n(LargeOne.data,15,13.43);
+    std::fill_n(LargeTwo.data,15,13.43);
+    LargeOne.data[10]=16.66;
+
+    
+    EXPECT_FALSE(LargeOne<LargeTwo);
+}
+TEST(LargeTest, Equal)
+{
+    Large LargeOne{};
+    Large LargeTwo{};
+    LargeTwo.clear();
+    LargeOne.clear();
+
+    std::fill_n(LargeOne.data,15,13.43);
+    std::fill_n(LargeTwo.data,15,13.43);
+    
+
+    ASSERT_EQ(LargeOne,LargeTwo);
+
+    LargeOne.data[10]=6.66;
+    
+    EXPECT_FALSE(LargeOne==LargeTwo);
+}
+TEST(LargeTest, Hash)
+{
+    Large LargeOne{};
+    Large LargeTwo{};
+
+    std::fill_n(LargeOne.data,Large::SIZE,1);
+    std::fill_n(LargeTwo.data,Large::SIZE,1);
+
+    std::hash<Large> hash{};
+    ASSERT_EQ(hash(LargeOne),hash(LargeTwo));
+}
+
 
 // TODO: Add tests for your operators implementation!

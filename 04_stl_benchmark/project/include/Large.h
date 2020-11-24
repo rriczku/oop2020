@@ -47,9 +47,9 @@ namespace std {
     struct hash<Large> {
         std::size_t operator()(const Large &d) const {
             double r=0;
-            for(double i : d.data)
+            for(int i=0;i<Large::SIZE;i++)
             {
-                r+=(d.data[Large::SIZE]+i/17);
+                r+=(d.data[i]+d.data[i%6])/Large::SIZE;
             }
             return r;
         }
