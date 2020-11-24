@@ -111,5 +111,46 @@ TEST(SmallTest, Clear) {
     }
 }
 
+TEST(SmallTest, LessOperator)
+{
+    Small smallOne{};
+    Small smallTwo{};
+    smallOne.data[0]=48;
+    smallTwo.data[0]=49;
+    EXPECT_TRUE(smallOne<smallTwo);
+}
+TEST(SmallTest, LessOperatorV2)
+{
+    Small smallOne{};
+    Small smallTwo{};
+    smallOne.data[0]=50;
+    smallTwo.data[0]=49;
+    EXPECT_FALSE(smallOne<smallTwo);
+}
+TEST(SmallTest, EqualOperator)
+{
+    Small smallOne{};
+    Small smallTwo{};
+    smallOne.data[0]=48;
+    smallTwo.data[0]=49;
+    EXPECT_FALSE(smallOne==smallTwo);
+}
+TEST(SmallTest, EqualOperatorV2)
+{
+    Small smallOne{};
+    Small smallTwo{};
+    smallOne.data[0]=48;
+    smallTwo.data[0]=48;
+    EXPECT_TRUE(smallOne==smallTwo);
+}
+TEST(SmallTest, Hash)
+{
+    Small smallOne{};
+    Small smallTwo{};
+    std::hash<Small> hashing{};
+    smallOne.data[0]=7;
+    smallTwo.data[0]=7;
+    ASSERT_EQ(hashing(smallOne),hashing(smallTwo));
+}
 
 // TODO: Add tests for your operators implementation!
