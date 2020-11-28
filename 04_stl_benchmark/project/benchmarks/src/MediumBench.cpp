@@ -56,7 +56,7 @@ static void Medium_List_Front(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_List_Front)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Medium_List_Front)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
 static void Medium_List_Back(State& state)
@@ -75,7 +75,7 @@ static void Medium_List_Back(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_List_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Medium_List_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
 static void Medium_List_Empty(State& state)
@@ -94,7 +94,7 @@ static void Medium_List_Empty(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_List_Empty)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Medium_List_Empty)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 static void Medium_List_Size(State& state)
 {
@@ -112,7 +112,7 @@ static void Medium_List_Size(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_List_Size)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Medium_List_Size)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 static void Medium_List_MaxSize(State& state)
 {
@@ -130,4 +130,4 @@ static void Medium_List_MaxSize(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_List_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Medium_List_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();

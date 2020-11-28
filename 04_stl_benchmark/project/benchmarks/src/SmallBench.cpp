@@ -2,6 +2,7 @@
 #include "BenchIncludes.h"
 #include <list>
 #include <map>
+#include <unordered_map>
 // TODO: Add benchmarks for operator<. operator==, and hash
 
 static void LessThan(State& state)
@@ -278,3 +279,109 @@ static void Small_Multimap_UpperBound(State& state)
     state.SetComplexityN(state.range(0));
 }
 BENCHMARK(Small_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+
+// unorderedmultimap
+
+static void Small_UnorderedMultimap_Empty(State& state)
+{
+    std::unordered_multimap<Small,Small> multimap{};
+    for(auto _ :state)
+    {
+        auto res=multimap.empty();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Empty)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Small_UnorderedMultimap_Size(State& state)
+{
+    std::unordered_multimap<Small,Small> multimap{};
+    for(auto _ :state)
+    {
+        auto res=multimap.size();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Size)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Small_UnorderedMultimap_MaxSize(State& state)
+{
+    std::unordered_multimap<Small,Small> multimap{};
+    for(auto _ :state)
+    {
+        auto res=multimap.max_size();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Small_UnorderedMultimap_Count(State& state)
+{
+    std::unordered_multimap<Small,Small> multimap{};
+    auto N=state.range(0);
+    for(auto i=0u;i<N;i++)
+    {
+        Small smallOne{};
+        Small smallTwo{};
+        smallOne.randomize();
+        smallTwo.randomize();
+        multimap.insert({smallOne,smallTwo});
+    }
+    for(auto _ :state)
+    {
+        Small small{};
+        small.randomize();
+        auto res=multimap.count(small);
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+
+static void Small_UnorderedMultimap_Find(State& state)
+{
+    std::unordered_multimap<Small,Small> multimap{};
+    auto N=state.range(0);
+    for(auto i=0u;i<N;i++)
+    {
+        Small smallOne{};
+        Small smallTwo{};
+        smallOne.randomize();
+        smallTwo.randomize();
+        multimap.insert({smallOne,smallTwo});
+    }
+    for(auto _ :state)
+    {
+        Small small{};
+        small.randomize();
+        auto res=multimap.find(small);
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+
+
+static void Small_UnorderedMultimap_EqualRange(State& state)
+{
+    std::unordered_multimap<Small,Small> multimap{};
+    auto N=state.range(0);
+    for(auto i=0u;i<N;i++)
+    {
+        Small smallOne{};
+        Small smallTwo{};
+        smallOne.randomize();
+        smallTwo.randomize();
+        multimap.insert({smallOne,smallTwo});
+    }
+    for(auto _ :state)
+    {
+        Small small{};
+        small.randomize();
+        auto res=multimap.equal_range(small);
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_EqualRange)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+
+
