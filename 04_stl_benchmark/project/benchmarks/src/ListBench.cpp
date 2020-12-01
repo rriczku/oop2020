@@ -113,7 +113,7 @@ static void Medium_List_Front(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.front();
+        DoNotOptimize(list.front());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -132,7 +132,7 @@ static void Medium_List_Back(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.back();
+        DoNotOptimize(list.back());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -151,7 +151,7 @@ static void Medium_List_Empty(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.empty();
+        DoNotOptimize(list.empty());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -169,7 +169,7 @@ static void Medium_List_Size(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.size();
+        DoNotOptimize(list.size());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -187,11 +187,12 @@ static void Medium_List_MaxSize(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.max_size();
+        DoNotOptimize(list.max_size());
     }
     state.SetComplexityN(state.range(0));
 }
 BENCHMARK(Medium_List_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
 
 //---------------------------------LARGE------------------------------------------------------
 
@@ -208,7 +209,7 @@ static void Large_List_Front(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.front();
+        DoNotOptimize(list.front());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -227,7 +228,7 @@ static void Large_List_Back(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.back();
+        DoNotOptimize(list.back());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -246,7 +247,7 @@ static void Large_List_Empty(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.empty();
+        DoNotOptimize(list.empty());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -264,7 +265,7 @@ static void Large_List_Size(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.size();
+        DoNotOptimize(list.size());
     }
     state.SetComplexityN(state.range(0));
 }
@@ -282,7 +283,7 @@ static void Large_List_MaxSize(State& state)
     }
     for(auto _ :state)
     {
-        auto res=list.max_size();
+        DoNotOptimize(list.max_size());
     }
     state.SetComplexityN(state.range(0));
 }
