@@ -44,6 +44,8 @@ static void Small_Multimap_Count(State& state)
 {
     std::multimap<Small,Small> multimap{};
     auto N=state.range(0);
+    Small small{};
+
     for(auto i=0u;i<N;i++)
     {
         Small smallOne{};
@@ -54,18 +56,19 @@ static void Small_Multimap_Count(State& state)
     }
     for(auto _ :state)
     {
-        Small small{};
         small.randomize();
-        auto res=multimap.count(small);
+        DoNotOptimize(multimap.count(small));
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Small_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Small_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 static void Small_Multimap_Find(State& state)
 {
     std::multimap<Small,Small> multimap{};
     auto N=state.range(0);
+    Small small{};
+
     for(auto i=0u;i<N;i++)
     {
         Small smallOne{};
@@ -76,19 +79,19 @@ static void Small_Multimap_Find(State& state)
     }
     for(auto _ :state)
     {
-        Small small{};
         small.randomize();
         auto res=multimap.find(small);
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Small_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Small_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
 static void Small_Multimap_EqualRange(State& state)
 {
     std::multimap<Small,Small> multimap{};
     auto N=state.range(0);
+    Small small{};
     for(auto i=0u;i<N;i++)
     {
         Small smallOne{};
@@ -99,7 +102,6 @@ static void Small_Multimap_EqualRange(State& state)
     }
     for(auto _ :state)
     {
-        Small small{};
         small.randomize();
         auto res=multimap.equal_range(small);
     }
@@ -112,6 +114,8 @@ static void Small_Multimap_LowerBound(State& state)
 {
     std::multimap<Small,Small> multimap{};
     auto N=state.range(0);
+    Small small{};
+
     for(auto i=0u;i<N;i++)
     {
         Small smallOne{};
@@ -122,7 +126,6 @@ static void Small_Multimap_LowerBound(State& state)
     }
     for(auto _ :state)
     {
-        Small small{};
         small.randomize();
         auto res=multimap.lower_bound(small);
     }
@@ -134,6 +137,8 @@ static void Small_Multimap_UpperBound(State& state)
 {
     std::multimap<Small,Small> multimap{};
     auto N=state.range(0);
+    Small small{};
+
     for(auto i=0u;i<N;i++)
     {
         Small smallOne{};
@@ -144,7 +149,6 @@ static void Small_Multimap_UpperBound(State& state)
     }
     for(auto _ :state)
     {
-        Small small{};
         small.randomize();
         auto res=multimap.upper_bound(small);
     }
@@ -193,28 +197,30 @@ static void Medium_Multimap_Count(State& state)
 {
     std::multimap<Medium,Medium> multimap{};
     auto N=state.range(0);
+    Medium mediumOne{};
+    Medium mediumTwo{};
+    Medium medium{};
     for(auto i=0u;i<N;i++)
     {
-        Medium MediumOne{};
-        Medium MediumTwo{};
-        MediumOne.randomize();
-        MediumTwo.randomize();
-        multimap.insert({MediumOne,MediumTwo});
+        mediumOne.randomize();
+        mediumTwo.randomize();
+        multimap.insert({mediumOne,mediumTwo});
     }
     for(auto _ :state)
     {
-        Medium Medium{};
-        Medium.randomize();
-        DoNotOptimize(multimap.count(Medium));
+        medium.randomize();
+        DoNotOptimize(multimap.count(medium));
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Medium_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
 
 static void Medium_Multimap_Find(State& state)
 {
     std::multimap<Medium,Medium> multimap{};
     auto N=state.range(0);
+
+    Medium medium{};
     for(auto i=0u;i<N;i++)
     {
         Medium MediumOne{};
@@ -225,19 +231,20 @@ static void Medium_Multimap_Find(State& state)
     }
     for(auto _ :state)
     {
-        Medium Medium{};
-        Medium.randomize();
-        auto res=multimap.find(Medium);
+        medium.randomize();
+        auto res=multimap.find(medium);
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Medium_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
 static void Medium_Multimap_EqualRange(State& state)
 {
     std::multimap<Medium,Medium> multimap{};
     auto N=state.range(0);
+
+    Medium medium{};
     for(auto i=0u;i<N;i++)
     {
         Medium MediumOne{};
@@ -248,9 +255,8 @@ static void Medium_Multimap_EqualRange(State& state)
     }
     for(auto _ :state)
     {
-        Medium Medium{};
-        Medium.randomize();
-        DoNotOptimize(multimap.equal_range(Medium));
+        medium.randomize();
+        DoNotOptimize(multimap.equal_range(medium));
     }
     state.SetComplexityN(state.range(0));
 }
@@ -261,6 +267,8 @@ static void Medium_Multimap_LowerBound(State& state)
 {
     std::multimap<Medium,Medium> multimap{};
     auto N=state.range(0);
+
+    Medium medium{};
     for(auto i=0u;i<N;i++)
     {
         Medium MediumOne{};
@@ -271,9 +279,8 @@ static void Medium_Multimap_LowerBound(State& state)
     }
     for(auto _ :state)
     {
-        Medium Medium{};
-        Medium.randomize();
-        DoNotOptimize(multimap.lower_bound(Medium));
+        medium.randomize();
+        DoNotOptimize(multimap.lower_bound(medium));
     }
     state.SetComplexityN(state.range(0));
 }
@@ -283,6 +290,8 @@ static void Medium_Multimap_UpperBound(State& state)
 {
     std::multimap<Medium,Medium> multimap{};
     auto N=state.range(0);
+
+    Medium medium{};
     for(auto i=0u;i<N;i++)
     {
         Medium MediumOne{};
@@ -293,9 +302,8 @@ static void Medium_Multimap_UpperBound(State& state)
     }
     for(auto _ :state)
     {
-        Medium Medium{};
-        Medium.randomize();
-        DoNotOptimize(multimap.upper_bound(Medium));
+        medium.randomize();
+        DoNotOptimize(multimap.upper_bound(medium));
     }
     state.SetComplexityN(state.range(0));
 }
@@ -342,6 +350,8 @@ static void Large_Multimap_Count(State& state)
 {
     std::multimap<Large,Large> multimap{};
     auto N=state.range(0);
+
+    Large large{};
     for(auto i=0u;i<N;i++)
     {
         Large LargeOne{};
@@ -352,18 +362,19 @@ static void Large_Multimap_Count(State& state)
     }
     for(auto _ :state)
     {
-        Large Large{};
-        Large.randomize();
-        DoNotOptimize(multimap.count(Large));
+        large.randomize();
+        DoNotOptimize(multimap.count(large));
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Large_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 static void Large_Multimap_Find(State& state)
 {
     std::multimap<Large,Large> multimap{};
     auto N=state.range(0);
+
+    Large large{};
     for(auto i=0u;i<N;i++)
     {
         Large LargeOne{};
@@ -374,19 +385,20 @@ static void Large_Multimap_Find(State& state)
     }
     for(auto _ :state)
     {
-        Large Large{};
-        Large.randomize();
-        DoNotOptimize(multimap.find(Large));
+        large.randomize();
+        DoNotOptimize(multimap.find(large));
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<18u)->Complexity();
+BENCHMARK(Large_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
 static void Large_Multimap_EqualRange(State& state)
 {
     std::multimap<Large,Large> multimap{};
     auto N=state.range(0);
+
+    Large large{};
     for(auto i=0u;i<N;i++)
     {
         Large LargeOne{};
@@ -397,9 +409,8 @@ static void Large_Multimap_EqualRange(State& state)
     }
     for(auto _ :state)
     {
-        Large Large{};
-        Large.randomize();
-        DoNotOptimize(multimap.equal_range(Large));
+        large.randomize();
+        DoNotOptimize(multimap.equal_range(large));
     }
     state.SetComplexityN(state.range(0));
 }
@@ -410,6 +421,8 @@ static void Large_Multimap_LowerBound(State& state)
 {
     std::multimap<Large,Large> multimap{};
     auto N=state.range(0);
+
+    Large large{};
     for(auto i=0u;i<N;i++)
     {
         Large LargeOne{};
@@ -420,9 +433,8 @@ static void Large_Multimap_LowerBound(State& state)
     }
     for(auto _ :state)
     {
-        Large Large{};
-        Large.randomize();
-        DoNotOptimize(multimap.lower_bound(Large));
+        large.randomize();
+        DoNotOptimize(multimap.lower_bound(large));
     }
     state.SetComplexityN(state.range(0));
 }
@@ -432,6 +444,7 @@ static void Large_Multimap_UpperBound(State& state)
 {
     std::multimap<Large,Large> multimap{};
     auto N=state.range(0);
+    Large large{};
     for(auto i=0u;i<N;i++)
     {
         Large LargeOne{};
@@ -442,9 +455,8 @@ static void Large_Multimap_UpperBound(State& state)
     }
     for(auto _ :state)
     {
-        Large Large{};
-        Large.randomize();
-        DoNotOptimize(multimap.upper_bound(Large));
+        large.randomize();
+        DoNotOptimize(multimap.upper_bound(large));
     }
     state.SetComplexityN(state.range(0));
 }
