@@ -74,6 +74,26 @@ static void Small_List_MaxSize(State& state)
 }
 BENCHMARK(Small_List_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
+static void Small_List_Clear(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    for(auto _ :state)
+    {
+        state.PauseTiming();
+        std::list<Small> list(size);
+        state.ResumeTiming();
+
+        list.clear();
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_List_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+
+
 //---------------------------------MEDIUM-------------------------------------------------
 
 static void Medium_List_Front(State& state)
