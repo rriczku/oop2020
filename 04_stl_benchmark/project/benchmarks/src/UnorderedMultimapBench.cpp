@@ -7,6 +7,20 @@
 #include "BenchIncludes.h"
 #include <unordered_map>
 
+static void Small_UnorderedMultimap_Create(State& state)
+{
+    std::unordered_multimap<Small,Small> multimap{};
+
+    for(auto _ :state)
+    {
+        Small s{};
+        s.randomize();
+        multimap.insert({s,s});
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Create)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
 
 static void Small_UnorderedMultimap_Empty(State& state)
 {
@@ -46,10 +60,10 @@ static void Small_UnorderedMultimap_Count(State& state)
     std::unordered_multimap<Small,Small> multimap{};
     auto N=state.range(0);
     Small small{};
+    Small smallOne{};
+    Small smallTwo{};
     for(auto i=0u;i<N;i++)
     {
-        Small smallOne{};
-        Small smallTwo{};
         smallOne.randomize();
         smallTwo.randomize();
         multimap.insert({smallOne,smallTwo});
@@ -92,10 +106,10 @@ static void Small_UnorderedMultimap_EqualRange(State& state)
     std::unordered_multimap<Small,Small> multimap{};
     auto N=state.range(0);
     Small small{};
+    Small smallOne{};
+    Small smallTwo{};
     for(auto i=0u;i<N;i++)
     {
-        Small smallOne{};
-        Small smallTwo{};
         smallOne.randomize();
         smallTwo.randomize();
         multimap.insert({smallOne,smallTwo});
@@ -109,6 +123,145 @@ static void Small_UnorderedMultimap_EqualRange(State& state)
     state.SetComplexityN(state.range(0));
 }
 BENCHMARK(Small_UnorderedMultimap_EqualRange)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+
+static void Small_UnorderedMultimap_Clear(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::multimap<Small,Small> mp{};
+    for(auto _ :state)
+    {
+        state.PauseTiming();
+        for(auto i=0;i<size;i++)
+        {
+            Small s1{};
+            s1.randomize();
+            mp.insert({s1,s1});
+        }
+        state.ResumeTiming();
+        mp.clear();
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Small_UnorderedMultimap_Insert(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    Small s{};
+    for(auto _ :state)
+    {
+        std::multimap<Small,Small> mp{};
+        s.randomize();
+        mp.insert({s,s});
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Small_UnorderedMultimap_Erase(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Small,Small> mp{};
+    Small s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        s.randomize();
+        DoNotOptimize(mp.erase(s));
+
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
+
+
+static void Small_UnorderedMultimap_Swap(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Small,Small> mp{};
+    std::multimap<Small,Small> mp2{};
+    Small s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        DoNotOptimize(mp);
+        DoNotOptimize(mp2);
+        mp.swap(mp2);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
+
+static void Small_UnorderedMultimap_Rehash(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::unordered_multimap<Small,Small> mp{};
+    for(auto _ :state)
+    {
+        for(auto i=0;i<size;i++)
+        {
+            Small s{};
+            s.randomize();
+            mp.insert({s,s});
+        }
+        auto n=rand()%size;
+        mp.rehash(n);
+        ClobberMemory();
+        DoNotOptimize(mp);
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Rehash)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
+static void Small_UnorderedMultimap_Reserve(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::unordered_multimap<Small,Small> mp{};
+    for(auto _ :state)
+    {
+        for(auto i=0;i<size;i++)
+        {
+            Small s{};
+            s.randomize();
+            mp.insert({s,s});
+        }
+        auto n=rand()%size;
+        mp.reserve(n);
+
+        ClobberMemory();
+        DoNotOptimize(mp);
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_UnorderedMultimap_Reserve)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
 
 // Medium
 
