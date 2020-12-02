@@ -156,6 +156,98 @@ static void Small_Multimap_UpperBound(State& state)
 }
 BENCHMARK(Small_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
+//
+static void Small_Multimap_Clear(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::multimap<Small,Small> mp{};
+    for(auto _ :state)
+    {
+        state.PauseTiming();
+        for(auto i=0;i<size;i++)
+        {
+            Small s1{};
+            s1.randomize();
+            mp.insert({s1,s1});
+        }
+        state.ResumeTiming();
+        mp.clear();
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_Multimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Small_Multimap_Insert(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    Small s{};
+    for(auto _ :state)
+    {
+        std::multimap<Small,Small> mp{};
+        s.randomize();
+        mp.insert({s,s});
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_Multimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Small_Multimap_Erase(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Small,Small> mp{};
+    Small s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        s.randomize();
+        DoNotOptimize(mp.erase(s));
+
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_Multimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
+
+
+static void Small_Multimap_Swap(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Small,Small> mp{};
+    std::multimap<Small,Small> mp2{};
+    Small s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        DoNotOptimize(mp);
+        DoNotOptimize(mp2);
+        mp.swap(mp2);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_Multimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
 
 //
 
