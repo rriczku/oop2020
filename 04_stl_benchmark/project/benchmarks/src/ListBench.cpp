@@ -1033,11 +1033,10 @@ static void Large_List_Erase(State& state)
     Large s{};
     for(auto _ :state)
     {
-        state.PauseTiming();
         s.randomize();
         auto it=l.begin();
         l.insert(it,s);
-        state.ResumeTiming();
+
         DoNotOptimize(l.erase(it));
     }
     state.SetComplexityN(state.range(0));

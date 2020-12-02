@@ -3,7 +3,7 @@
 
 // TODO: Add benchmarks for operator<. operator==, and hash
 
-static void LessThan(State& state)
+static void SmallLessThan(State& state)
 {
     Small a{};
     Small b{};
@@ -14,9 +14,9 @@ static void LessThan(State& state)
         a<b;
     }
 }
-BENCHMARK(LessThan);
+BENCHMARK(SmallLessThan);
 
-static void Equal(State& state)
+static void SmallEqual(State& state)
 {
     Small a{};
     Small b{};
@@ -27,8 +27,8 @@ static void Equal(State& state)
         a==b;
     }
 }
-BENCHMARK(Equal);
-static void Hash(State& state)
+BENCHMARK(SmallEqual);
+static void SmallHash(State& state)
 {
     Small a{};
     std::hash<Small> hash{};
@@ -38,7 +38,7 @@ static void Hash(State& state)
         hash(a);
     }
 }
-BENCHMARK(Hash);
+BENCHMARK(SmallHash);
 
 //multimap
 // unorderedmultimap
