@@ -401,6 +401,103 @@ static void Medium_Multimap_UpperBound(State& state)
 }
 BENCHMARK(Medium_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
+
+
+static void Medium_Multimap_Clear(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::multimap<Medium,Medium> mp{};
+    Medium s1{};
+    for(auto _ :state)
+    {
+        for(auto i=0;i<size;i++)
+        {
+            s1.randomize();
+            mp.insert({s1,s1});
+        }
+        mp.clear();
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Medium_Multimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Medium_Multimap_Insert(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::multimap<Medium,Medium> mp{};
+    Medium s{};
+    for(auto _ :state)
+    {
+
+        s.randomize();
+        mp.insert({s,s});
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Medium_Multimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Medium_Multimap_Erase(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Medium,Medium> mp{};
+    Medium s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        s.randomize();
+        DoNotOptimize(mp.erase(s));
+
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Medium_Multimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
+
+
+static void Medium_Multimap_Swap(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Medium,Medium> mp{};
+    std::multimap<Medium,Medium> mp2{};
+    Medium s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        DoNotOptimize(mp);
+        DoNotOptimize(mp2);
+        mp.swap(mp2);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Medium_Multimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+
+
+
+
+
+
 /// LARGE
 
 
@@ -442,16 +539,16 @@ static void Large_Multimap_Count(State& state)
 {
     std::multimap<Large,Large> multimap{};
     auto N=state.range(0);
-
     Large large{};
     for(auto i=0u;i<N;i++)
     {
-        Large LargeOne{};
-        Large LargeTwo{};
-        LargeOne.randomize();
-        LargeTwo.randomize();
-        multimap.insert({LargeOne,LargeTwo});
+        Large largeOne{};
+        largeOne.randomize();
+        Large largeTwo{};
+        largeTwo.randomize();
+        multimap.insert({largeOne,largeTwo});
     }
+
     for(auto _ :state)
     {
         large.randomize();
@@ -459,18 +556,17 @@ static void Large_Multimap_Count(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 static void Large_Multimap_Find(State& state)
 {
     std::multimap<Large,Large> multimap{};
     auto N=state.range(0);
-
+    Large LargeOne{};
+    Large LargeTwo{};
     Large large{};
     for(auto i=0u;i<N;i++)
     {
-        Large LargeOne{};
-        Large LargeTwo{};
         LargeOne.randomize();
         LargeTwo.randomize();
         multimap.insert({LargeOne,LargeTwo});
@@ -482,7 +578,7 @@ static void Large_Multimap_Find(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 
 static void Large_Multimap_EqualRange(State& state)
@@ -506,7 +602,7 @@ static void Large_Multimap_EqualRange(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_EqualRange)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_EqualRange)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 
 static void Large_Multimap_LowerBound(State& state)
@@ -530,7 +626,7 @@ static void Large_Multimap_LowerBound(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_LowerBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_LowerBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 static void Large_Multimap_UpperBound(State& state)
 {
@@ -552,6 +648,95 @@ static void Large_Multimap_UpperBound(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 
+
+static void Large_Multimap_Clear(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::multimap<Large,Large> mp{};
+    Large s1{};
+    for(auto _ :state)
+    {
+        for(auto i=0;i<size;i++)
+        {
+            s1.randomize();
+            mp.insert({s1,s1});
+        }
+        mp.clear();
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Large_Multimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+
+static void Large_Multimap_Insert(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    Large s{};
+    for(auto _ :state)
+    {
+        std::multimap<Large,Large> mp{};
+        s.randomize();
+        mp.insert({s,s});
+
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Large_Multimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+
+static void Large_Multimap_Erase(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Large,Large> mp{};
+    Large s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        s.randomize();
+        DoNotOptimize(mp.erase(s));
+
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Large_Multimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+
+
+
+static void Large_Multimap_Swap(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+
+    std::multimap<Large,Large> mp{};
+    std::multimap<Large,Large> mp2{};
+    Large s{};
+    for(auto i=0;i<size;i++)
+    {
+        s.randomize();
+        mp.insert({s,s});
+    }
+    for(auto _ :state)
+    {
+        DoNotOptimize(mp);
+        DoNotOptimize(mp2);
+        mp.swap(mp2);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Large_Multimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
