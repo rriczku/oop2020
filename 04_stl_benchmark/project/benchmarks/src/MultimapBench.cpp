@@ -7,6 +7,17 @@
 #include "BenchIncludes.h"
 #include <map>
 
+static void Small_Multimap_Create(State& state)
+{
+    for(auto _ :state)
+    {
+        std::multimap<Small,Small> multimap{};
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Small_Multimap_Create)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+
 static void Small_Multimap_Empty(State& state)
 {
     std::multimap<Small,Small> multimap{};
