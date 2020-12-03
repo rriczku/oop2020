@@ -770,16 +770,13 @@ static void Medium_List_Splice(State& state)
 }
 BENCHMARK(Medium_List_Splice)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
  */
-
-
-static void Medium_List_Remove(State& state)
+static void Medium_List_Help(State& state)
 {
     auto N=state.range(0);
     auto size=(std::size_t)N;
-
+    Medium sm{};
     for(auto _ :state)
     {
-        state.PauseTiming();
         std::list<Medium> l{};
         for(auto i=0;i<size;i++)
         {
@@ -787,29 +784,50 @@ static void Medium_List_Remove(State& state)
             s.randomize();
             l.push_back(s);
         }
-        Medium sm{};
         sm.randomize();
-        state.ResumeTiming();
+        DoNotOptimize(l); DoNotOptimize(sm);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Medium_List_Help)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+
+static void Medium_List_Remove(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    Medium sm{};
+    for(auto _ :state)
+    {
+
+        std::list<Medium> l{};
+        for(auto i=0;i<size;i++)
+        {
+            Medium s{};
+            s.randomize();
+            l.push_back(s);
+        }
+
+        sm.randomize();
         l.remove(sm);
         DoNotOptimize(l);
         ClobberMemory();
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_List_Remove)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Medium_List_Remove)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 
 static void Medium_List_Remove_If(State& state)
 {
     auto N=state.range(0);
     auto size=(std::size_t)N;
-
+    Medium sm{};
     struct isLess{
         bool operator()(const Medium& s){return s.data[0]<100;}
     };
     for(auto _ :state)
     {
-        state.PauseTiming();
         std::list<Medium> l{};
         for(auto i=0;i<size;i++)
         {
@@ -817,16 +835,14 @@ static void Medium_List_Remove_If(State& state)
             s.randomize();
             l.push_back(s);
         }
-        Medium sm{};
         sm.randomize();
-        state.ResumeTiming();
         l.remove_if(isLess());
         DoNotOptimize(l);
         ClobberMemory();
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_List_Remove_If)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Medium_List_Remove_If)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 static void Medium_List_Reverse(State& state)
 {
@@ -857,7 +873,6 @@ static void Medium_List_Unique(State& state)
 
     for(auto _ :state)
     {
-        state.PauseTiming();
         std::list<Medium> l{};
         for(auto i=0;i<size;i++)
         {
@@ -865,7 +880,6 @@ static void Medium_List_Unique(State& state)
             s.randomize();
             l.push_back(s);
         }
-        state.ResumeTiming();
 
         l.unique();
         DoNotOptimize(l);
@@ -882,7 +896,6 @@ static void Medium_List_Sort(State& state)
 
     for(auto _ :state)
     {
-        state.PauseTiming();
         std::list<Medium> l{};
         for(auto i=0;i<size;i++)
         {
@@ -890,7 +903,6 @@ static void Medium_List_Sort(State& state)
             s.randomize();
             l.push_back(s);
         }
-        state.ResumeTiming();
 
         l.sort();
         DoNotOptimize(l);
@@ -928,7 +940,7 @@ static void Large_List_Back(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 static void Large_List_Empty(State& state)
@@ -942,7 +954,7 @@ static void Large_List_Empty(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Empty)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Empty)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Size(State& state)
 {
@@ -955,7 +967,7 @@ static void Large_List_Size(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Size)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Size)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_MaxSize(State& state)
 {
@@ -968,7 +980,7 @@ static void Large_List_MaxSize(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 static void Large_List_Clear(State& state)
@@ -988,7 +1000,7 @@ static void Large_List_Clear(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Insert(State& state)
 {
@@ -1010,7 +1022,7 @@ static void Large_List_Insert(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Construct(State& state)
 {
@@ -1023,7 +1035,7 @@ static void Large_List_Construct(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Construct)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Construct)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Erase(State& state)
 {
@@ -1041,7 +1053,7 @@ static void Large_List_Erase(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Push_Back(State& state)
 {
@@ -1058,7 +1070,7 @@ static void Large_List_Push_Back(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Push_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Push_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 static void Large_List_Pop_Back(State& state)
@@ -1077,7 +1089,7 @@ static void Large_List_Pop_Back(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Pop_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Pop_Back)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Push_Front(State& state)
 {
@@ -1094,7 +1106,7 @@ static void Large_List_Push_Front(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Push_Front)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Push_Front)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Pop_Front(State& state)
 {
@@ -1112,7 +1124,7 @@ static void Large_List_Pop_Front(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Pop_Front)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Pop_Front)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Resize(State& state)
 {
@@ -1132,7 +1144,7 @@ static void Large_List_Resize(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Resize)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Resize)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Swap(State& state)
 {
@@ -1161,9 +1173,9 @@ static void Large_List_Swap(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
-static void Large_List_Merge(State& state)
+static void Large_List_MergeHelp(State& state)
 {
     auto N=state.range(0);
     auto size=(std::size_t)N;
@@ -1172,7 +1184,6 @@ static void Large_List_Merge(State& state)
     Large s{};
     for(auto _ :state)
     {
-        state.PauseTiming();
         for(auto i=0;i<size;i++)
         {
             s.randomize();
@@ -1183,7 +1194,35 @@ static void Large_List_Merge(State& state)
             s.randomize();
             s2.push_back(s);
         }
-        state.ResumeTiming();
+
+        DoNotOptimize(s1);
+        DoNotOptimize(s2);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Large_List_MergeHelp)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
+
+static void Large_List_Merge(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::list<Large> s1(size);
+    std::list<Large> s2(size);
+    Large s{};
+    for(auto _ :state)
+    {
+        for(auto i=0;i<size;i++)
+        {
+            s.randomize();
+            s1.push_back(s);
+        }
+        for(auto i=0;i<size;i++)
+        {
+            s.randomize();
+            s2.push_back(s);
+        }
+
         s1.merge(s2);
         DoNotOptimize(s1);
         DoNotOptimize(s2);
@@ -1191,7 +1230,7 @@ static void Large_List_Merge(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Merge)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Merge)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 /*
 static void Large_List_Splice(State& state)
@@ -1218,7 +1257,7 @@ static void Large_List_Splice(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Splice)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Splice)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
  */
 
 
@@ -1226,10 +1265,9 @@ static void Large_List_Remove(State& state)
 {
     auto N=state.range(0);
     auto size=(std::size_t)N;
-
+    Large sm{};
     for(auto _ :state)
     {
-        state.PauseTiming();
         std::list<Large> l{};
         for(auto i=0;i<size;i++)
         {
@@ -1237,29 +1275,26 @@ static void Large_List_Remove(State& state)
             s.randomize();
             l.push_back(s);
         }
-        Large sm{};
         sm.randomize();
-        state.ResumeTiming();
         l.remove(sm);
         DoNotOptimize(l);
         ClobberMemory();
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Remove)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Remove)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 static void Large_List_Remove_If(State& state)
 {
     auto N=state.range(0);
     auto size=(std::size_t)N;
-
+    Large sm{};
     struct isLess{
         bool operator()(const Large& s){return s.data[0]<100;}
     };
     for(auto _ :state)
     {
-        state.PauseTiming();
         std::list<Large> l{};
         for(auto i=0;i<size;i++)
         {
@@ -1267,16 +1302,14 @@ static void Large_List_Remove_If(State& state)
             s.randomize();
             l.push_back(s);
         }
-        Large sm{};
         sm.randomize();
-        state.ResumeTiming();
         l.remove_if(isLess());
         DoNotOptimize(l);
         ClobberMemory();
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Remove_If)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Remove_If)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Reverse(State& state)
 {
@@ -1298,7 +1331,7 @@ static void Large_List_Reverse(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Reverse)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Reverse)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Unique(State& state)
 {
@@ -1323,7 +1356,7 @@ static void Large_List_Unique(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Unique)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Unique)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_List_Sort(State& state)
 {
@@ -1332,7 +1365,6 @@ static void Large_List_Sort(State& state)
 
     for(auto _ :state)
     {
-        state.PauseTiming();
         std::list<Large> l{};
         for(auto i=0;i<size;i++)
         {
@@ -1340,7 +1372,6 @@ static void Large_List_Sort(State& state)
             s.randomize();
             l.push_back(s);
         }
-        state.ResumeTiming();
 
         l.sort();
         DoNotOptimize(l);
@@ -1348,4 +1379,4 @@ static void Large_List_Sort(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_List_Sort)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_List_Sort)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();

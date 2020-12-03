@@ -10,7 +10,8 @@ static void MediumLessThan(State& state)
     b.randomize();
 
     for(auto _ : state){
-        a<b;
+        auto res = (a<b);
+        DoNotOptimize(res);
     }
 }
 BENCHMARK(MediumLessThan);
@@ -23,7 +24,8 @@ static void MediumEqual(State& state)
     b.randomize();
 
     for(auto _ : state){
-        a==b;
+        auto res=(a==b);
+        DoNotOptimize(res);
     }
 }
 BENCHMARK(MediumEqual);
@@ -34,7 +36,7 @@ static void MediumHash(State& state)
     a.randomize();
 
     for(auto _ : state){
-        hash(a);
+        DoNotOptimize(hash(a));
     }
 }
 BENCHMARK(MediumHash);

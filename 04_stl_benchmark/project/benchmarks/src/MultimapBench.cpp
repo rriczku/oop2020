@@ -318,6 +318,8 @@ static void Medium_Multimap_Count(State& state)
 }
 BENCHMARK(Medium_Multimap_Count)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
 
+
+
 static void Medium_Multimap_Find(State& state)
 {
     std::multimap<Medium,Medium> multimap{};
@@ -339,7 +341,7 @@ static void Medium_Multimap_Find(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Medium_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 
 static void Medium_Multimap_EqualRange(State& state)
@@ -413,6 +415,25 @@ static void Medium_Multimap_UpperBound(State& state)
 BENCHMARK(Medium_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
+static void Medium_Multimap_ClearHelp(State& state)
+{
+    auto N=state.range(0);
+    auto size=(std::size_t)N;
+    std::multimap<Medium,Medium> mp{};
+    Medium s1{};
+    for(auto _ :state)
+    {
+        for(auto i=0;i<size;i++)
+        {
+            s1.randomize();
+            mp.insert({s1,s1});
+        }
+        DoNotOptimize(mp);
+        ClobberMemory();
+    }
+    state.SetComplexityN(state.range(0));
+}
+BENCHMARK(Medium_Multimap_ClearHelp)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 static void Medium_Multimap_Clear(State& state)
 {
@@ -434,7 +455,7 @@ static void Medium_Multimap_Clear(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_Multimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Medium_Multimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 static void Medium_Multimap_Insert(State& state)
 {
@@ -453,7 +474,7 @@ static void Medium_Multimap_Insert(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_Multimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Medium_Multimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
 
 static void Medium_Multimap_Erase(State& state)
 {
@@ -476,7 +497,7 @@ static void Medium_Multimap_Erase(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_Multimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+BENCHMARK(Medium_Multimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
 
@@ -502,7 +523,7 @@ static void Medium_Multimap_Swap(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Medium_Multimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<15u)->Complexity();
+BENCHMARK(Medium_Multimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
 
 
 
@@ -522,7 +543,7 @@ static void Large_Multimap_Empty(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Empty)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_Empty)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_Multimap_Size(State& state)
 {
@@ -533,7 +554,7 @@ static void Large_Multimap_Size(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Size)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_Size)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_Multimap_MaxSize(State& state)
 {
@@ -544,7 +565,7 @@ static void Large_Multimap_MaxSize(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_MaxSize)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_Multimap_Count(State& state)
 {
@@ -589,7 +610,7 @@ static void Large_Multimap_Find(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+BENCHMARK(Large_Multimap_Find)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 static void Large_Multimap_EqualRange(State& state)
@@ -613,7 +634,7 @@ static void Large_Multimap_EqualRange(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_EqualRange)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+BENCHMARK(Large_Multimap_EqualRange)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 static void Large_Multimap_LowerBound(State& state)
@@ -637,7 +658,7 @@ static void Large_Multimap_LowerBound(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_LowerBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+BENCHMARK(Large_Multimap_LowerBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_Multimap_UpperBound(State& state)
 {
@@ -659,7 +680,7 @@ static void Large_Multimap_UpperBound(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+BENCHMARK(Large_Multimap_UpperBound)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 
@@ -683,7 +704,7 @@ static void Large_Multimap_Clear(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+BENCHMARK(Large_Multimap_Clear)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_Multimap_Insert(State& state)
 {
@@ -701,7 +722,7 @@ static void Large_Multimap_Insert(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+BENCHMARK(Large_Multimap_Insert)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 static void Large_Multimap_Erase(State& state)
 {
@@ -724,7 +745,7 @@ static void Large_Multimap_Erase(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<8u)->Complexity();
+BENCHMARK(Large_Multimap_Erase)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();
 
 
 
@@ -750,4 +771,4 @@ static void Large_Multimap_Swap(State& state)
     }
     state.SetComplexityN(state.range(0));
 }
-BENCHMARK(Large_Multimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<10u)->Complexity();
+BENCHMARK(Large_Multimap_Swap)->RangeMultiplier(2)->Range(1u <<5u,1u<<7u)->Complexity();

@@ -10,7 +10,8 @@ static void LargeLessThan(State& state)
     b.randomize();
 
     for(auto _ : state){
-        a<b;
+       auto res= (a<b);
+       DoNotOptimize(res);
     }
 }
 BENCHMARK(LargeLessThan);
@@ -23,7 +24,8 @@ static void LargeEqual(State& state)
     b.randomize();
 
     for(auto _ : state){
-        a==b;
+        auto res=(a==b);
+        DoNotOptimize(res);
     }
 }
 BENCHMARK(LargeEqual);
@@ -34,7 +36,7 @@ static void LargeHash(State& state)
     a.randomize();
 
     for(auto _ : state){
-        hash(a);
+        DoNotOptimize(hash(a));
     }
 }
 BENCHMARK(LargeHash);

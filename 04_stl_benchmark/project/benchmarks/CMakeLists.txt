@@ -6,7 +6,7 @@ set(BENCHMARKS_HEADERS
 
 set(BENCHMARKS_SOURCES
         src/DummyBench.cpp src/ExampleBench.cpp src/PauseAndResumeBench.cpp
-        src/SmallBench.cpp src/MediumBench.cpp src/LargeBench.cpp)
+        src/SmallBench.cpp src/MediumBench.cpp src/LargeBench.cpp src/ListBench.cpp src/MultimapBench.cpp src/UnorderedMultimapBench.cpp)
 
 add_executable(benchmarks ${BENCHMARKS_HEADERS} ${BENCHMARKS_SOURCES})
 target_include_directories(benchmarks PUBLIC include)

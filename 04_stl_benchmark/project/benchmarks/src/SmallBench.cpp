@@ -11,7 +11,8 @@ static void SmallLessThan(State& state)
     b.randomize();
 
     for(auto _ : state){
-        a<b;
+        auto res=(a<b);
+        DoNotOptimize(res);
     }
 }
 BENCHMARK(SmallLessThan);
@@ -24,7 +25,8 @@ static void SmallEqual(State& state)
     b.randomize();
 
     for(auto _ : state){
-        a==b;
+        auto res=(a==b);
+        DoNotOptimize(res);
     }
 }
 BENCHMARK(SmallEqual);
@@ -35,7 +37,7 @@ static void SmallHash(State& state)
     a.randomize();
 
     for(auto _ : state){
-        hash(a);
+        DoNotOptimize(hash(a));
     }
 }
 BENCHMARK(SmallHash);
