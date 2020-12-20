@@ -8,14 +8,11 @@ add_library(utils
         include/Time.h
         include/Universe.h
         include/Observer.h
-        src/Space.cpp
-        src/Time.cpp
-        src/Observer.cpp
-        src/Universe.cpp)
+        src/Universe.cpp src/ObserverImpl.cpp src/SpaceImpl.cpp src/TimeImpl.cpp include/TimeImpl.h)
 
 target_include_directories(utils PUBLIC include)
 
-add_executable(runner src/main.cpp)
+add_executable(runner src/main.cpp include/SpaceImpl.h include/ObserverImpl.h include/TimeImpl.h)
 target_link_libraries(runner PRIVATE utils)
 
 add_subdirectory(tests)
