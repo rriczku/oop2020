@@ -8,7 +8,7 @@ class DisplacementTest : public QObject
 
 
 private slots:
-    void displacementTest()
+    void dTest()
     {
         Displacement d{};
         QSignalSpy s(&d,SIGNAL(change(double)));

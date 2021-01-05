@@ -8,7 +8,7 @@ class SpeedTest : public QObject
 
 
 private slots:
-    void speedTest()
+    void sTest()
     {
         Displacement d{};
         Speed s{};

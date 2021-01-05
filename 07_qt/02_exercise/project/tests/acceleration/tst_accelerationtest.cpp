@@ -8,11 +8,10 @@ class AccelerationTest : public QObject
 
 
 private slots:
-    void accelerationTest()
+    void aTest()
     {
         Acceleration a{};
         Displacement d{};
-
 
         QObject::connect(&d,SIGNAL(change(double)),&a,SLOT(onChange(double)));
 
