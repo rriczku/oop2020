@@ -25,7 +25,7 @@ void Acceleration::onChange(double v)
             firstValue=v;
         }
 }
-float Acceleration::get()
+double Acceleration::get()
 {
     if(hasFirstValue&&hasSecondValue&&hasThirdValue)
             return (thirdValue-secondValue)-(secondValue-firstValue);

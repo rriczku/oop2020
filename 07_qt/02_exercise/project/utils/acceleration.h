@@ -8,7 +8,7 @@ class Acceleration : public QObject
     Q_OBJECT
 public:
     explicit Acceleration(QObject *parent = nullptr);
-    float get();
+    double get();
 
 private:
         bool hasFirstValue;
