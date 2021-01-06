@@ -2,7 +2,10 @@
 #include <QDebug>
 Speed::Speed(QObject *parent) : QObject(parent)
 {
-
+    hasFirstValue=false;
+    hasSecondValue=false;
+    firstValue=0;
+    secondValue=0;
 }
 
 void Speed::onChange(double v)
@@ -20,7 +23,7 @@ void Speed::onChange(double v)
           secondValue = v;
       }
 }
-float Speed::get()
+double Speed::get()
 {
     return secondValue-firstValue;
 }

@@ -2,7 +2,12 @@
 #include <QDebug>
 Acceleration::Acceleration(QObject *parent) : QObject(parent)
 {
-
+    hasFirstValue=false;
+    hasSecondValue=false;
+    hasThirdValue=false;
+    firstValue=0;
+    secondValue=0;
+    thirdValue=0;
 }
 void Acceleration::onChange(double v)
 {

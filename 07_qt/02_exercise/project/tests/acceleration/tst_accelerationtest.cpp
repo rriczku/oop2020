@@ -11,7 +11,7 @@ class AccelerationTest : public QObject
 private slots:
     void aTest()
     {
-        /*Acceleration a{};
+        Acceleration a{};
         Displacement d{};
 
         QObject::connect(&d,SIGNAL(change(double)),&a,SLOT(onChange(double)));
@@ -19,7 +19,8 @@ private slots:
         d.set(10);
         d.set(11);
         d.set(13);
-        QVERIFY(a.get()==1);*/
+
+        QVERIFY(a.get()==1);
     }
 };
 

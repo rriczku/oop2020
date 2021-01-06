@@ -8,12 +8,12 @@ class Speed : public QObject
     Q_OBJECT
 public:
     explicit Speed(QObject *parent = nullptr);
-    float get();
+    double get();
 private:
     bool hasFirstValue;
     bool hasSecondValue;
-    int firstValue;
-    int secondValue;
+    double firstValue;
+    double secondValue;
 
 public slots:
     void onChange(double v);
