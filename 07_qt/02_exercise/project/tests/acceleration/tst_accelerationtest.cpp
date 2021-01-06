@@ -2,6 +2,7 @@
 
 #include "acceleration.h"
 #include "displacement.h"
+#include "utils.h"
 class AccelerationTest : public QObject
 {
     Q_OBJECT

@@ -1,7 +1,7 @@
 #include <QtTest>
 
 #include "displacement.h"
-
+#include "utils.h"
 class DisplacementTest : public QObject
 {
     Q_OBJECT

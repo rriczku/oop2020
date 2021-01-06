@@ -1,7 +1,7 @@
 #include <QtTest>
 #include "speed.h"
 #include "displacement.h"
-
+#include "utils.h"
 class SpeedTest : public QObject
 {
     Q_OBJECT

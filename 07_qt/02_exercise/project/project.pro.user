@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.0, 2021-01-05T23:15:44. -->
+<!-- Written by QtCreator 4.11.0, 2021-01-06T14:50:03. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -65,7 +65,7 @@
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{841d369e-d2f7-4b1c-b0a9-0d94b1b85d51}</value>
-   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
+   <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">1</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">2</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
@@ -297,7 +297,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Debug/cli</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Release/cli</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.1">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -371,7 +371,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Debug/gui</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Release/gui</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.2">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -445,7 +445,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Debug/tests/speed</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Release/tests/speed</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.3">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -519,7 +519,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Debug/tests/displacement</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Release/tests/displacement</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.RunConfiguration.4">
     <value type="QString" key="Analyzer.Perf.CallgraphMode">dwarf</value>
@@ -593,7 +593,7 @@
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory"></value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Debug/tests/acceleration</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/student/oop_2020_jakub_rychlicki/07_qt/02_exercise/build-project-Desktop-Release/tests/acceleration</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">5</value>
   </valuemap>
