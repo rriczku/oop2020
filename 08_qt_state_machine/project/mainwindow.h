@@ -24,6 +24,7 @@ public slots:
     void open();
     void save();
 
+
 private:
     Ui::MainWindow *ui;
 
