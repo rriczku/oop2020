@@ -3,6 +3,7 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
 
 import pl.gwizdz 1.0
+import pl.jrychu 1.0
 
 Window {
     visible: true
@@ -10,64 +11,79 @@ Window {
     height: 480
     title: qsTr("Hello World")
 
-    Counter {
-        id: counter
-        onChanged: function() {
-            console.info("Changed...")
+    Displacement {
+        id:displacement
+        onChanged: function(){
+            speed.changed(displacement.value);
+            acceleration.changed(displacement.value);
         }
     }
 
-    Dial {
-        id: dial
-        x: 67
-        y: 148
-        value: counter.value / 100.0
+    Speed {
+        id:speed
     }
 
-    ProgressBar {
-        id: progressBar
-        x: 264
-        y: 237
-        value: dial.value
+    Acceleration{
+        id:acceleration
+    }
+
+    //acceleration
+    Dial {
+        id: dial
+        x: 36
+        y: 148
+        from : -100
+        to : 100
+        Behavior on value { SpringAnimation { spring: 2; damping: 0.1 } }
+    }
+    //speed
+    Dial {
+        id: dial1
+        x: 415
+        y: 148
+        from: 0
+        to:100
+
+        Behavior on value { SpringAnimation { spring: 2; damping: 0.1 } }
+
     }
 
     Text {
         id: element
-        x: 264
-        y: 162
-        width: 200
-        height: 48
-        text: dial.value
+        x: 91
+        y: 345
+        text: qsTr("Acceleration")
         font.pixelSize: 12
-    }
-
-    Button {
-        id: button
-        x: 490
-        y: 220
-        text: qsTr("Clear")
-        onClicked: function() {
-            counter.value = 0
-        }
-    }
-
-    Button {
-        id: button1
-        x: 490
-        y: 328
-        text: qsTr("Increment")
-        onClicked: function() {
-            counter.increment()
-        }
     }
 
     Text {
         id: element1
-        x: 264
-        y: 341
-        width: 200
-        height: 27
-        text: counter.value
+        x: 488
+        y: 345
+        text: qsTr("Speed")
+        font.pixelSize: 12
+    }
+    //displacement
+    Slider {
+        id: slider
+        x: 220
+        y: 400
+        from:-50
+        to:50
+        value:0
+
+        onMoved: function(){
+            displacement.set(value)
+            dial.value=acceleration.get();
+            dial1.value=speed.get();
+        }
+    }
+
+    Text {
+        id: element2
+        x: 279
+        y: 446
+        text: qsTr("Displacement")
         font.pixelSize: 12
     }
 }

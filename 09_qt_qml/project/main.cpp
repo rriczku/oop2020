@@ -2,6 +2,9 @@
 #include <QQmlApplicationEngine>
 
 #include "counter.h"
+#include "speed.h"
+#include "acceleration.h"
+#include "displacement.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +13,9 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<Counter>("pl.gwizdz", 1, 0, "Counter");
+    qmlRegisterType<Speed>("pl.jrychu",1,0,"Speed");
+    qmlRegisterType<Acceleration>("pl.jrychu",1,0,"Acceleration");
+    qmlRegisterType<Displacement>("pl.jrychu",1,0,"Displacement");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
@@ -20,8 +26,8 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
 
-    auto counter = engine.rootObjects().first()->findChild<Counter*>();
-    counter->initialise(10);
+    auto displacement=engine.rootObjects().first()->findChild<Displacement*>();
+    displacement->initialize(0);
 
     return app.exec();
 }
